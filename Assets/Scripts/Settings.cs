@@ -34,28 +34,64 @@ public class Settings : MonoBehaviour
         }else{
             print("NULL");
         }
-
+        int numOfTask = PlayerPrefs.GetInt("NumberOfTasks");
         numOfTasksToggles = GameObject.FindGameObjectsWithTag("NumberOfTasks");
         numOfAnsToggles = GameObject.FindGameObjectsWithTag("NumberOfAnswers");
         musicToggle = GameObject.FindGameObjectsWithTag("Music");
+
+        highlightRightOne(PlayerPrefs.GetInt("NumberOfTasks"), PlayerPrefs.GetInt("NumberOfAnswers"), PlayerPrefs.GetInt("Music"));
 
         NumberOfAnsToggle();
         NumberOfTasksToggle();
         MusicToggle();
 
         //Values on enter
-        numOfAnsGO = whichIsOn(numOfAnsToggles);
-        numOfTasksGO = whichIsOn(numOfTasksToggles);
-        musicGO = whichIsOn(musicToggle);
+        //numOfAnsGO = whichIsOn(numOfAnsToggles);
+        //numOfTasksGO = whichIsOn(numOfTasksToggles);
+        //musicGO = whichIsOn(musicToggle);
 
 
-        print("On enter num of Tasks: " + numOfTasksGO.name);
 
         menuButtons = GameObject.FindGameObjectsWithTag("MenuButton");
         foreach(GameObject button in menuButtons)
         {
             button.GetComponent<Button>().interactable = false;
         }
+    }
+
+    public void highlightRightOne(int tasks, int answers, int music)
+    {
+
+        foreach(GameObject obj in numOfTasksToggles)
+        {
+            if(FindValueNumOfTasks(obj.name) == tasks)
+            {
+                obj.GetComponent<Toggle>().isOn = true;
+                break;
+            }
+        }
+        foreach (GameObject obj in numOfAnsToggles)
+        {
+            if (FindValueNumOfAns(obj.name) == answers)
+            {
+                obj.GetComponent<Toggle>().isOn = true;
+                break;
+            }
+        }
+        foreach (GameObject obj in musicToggle)
+        {
+            if (obj.name.Equals("MusicYes") && music == 1)
+            {
+                obj.GetComponent<Toggle>().isOn = true;
+                break;
+            } else
+            if (obj.name.Equals("MusicNo") && music == 0)
+            {
+                obj.GetComponent<Toggle>().isOn = true;
+                break;
+            }
+        }
+
     }
 
     public void NumberOfTasksToggle()

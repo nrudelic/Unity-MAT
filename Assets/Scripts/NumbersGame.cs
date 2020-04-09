@@ -3,69 +3,248 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class NumbersGame : MonoBehaviour
 {
-    public static TextMeshProUGUI signOneText;
-    public static TextMeshProUGUI signTwoText;
+    public GameObject canvas;
     public GameObject image1;
     public GameObject image2;
     public GameObject image3;
     public GameObject image4;
     public GameObject image5;
     public GameObject image6;
+    public GameObject image7;
+    public GameObject image8;
+    public GameObject image9;
+    public GameObject image10;
+    public GameObject sunImg;
     public static List<GameObject> images;
+    public static int start = 1;
+    public GameObject[] signs;
+    public static GameObject rightButton;
+    public Image answerColorImage;
+    public static TextMeshProUGUI pressed;
+    public GameObject answerFrame;
+    private static Vector3 destination;
+    private int shouldMove = 0;
+    private static List<GameObject> triedAnswers;
+    private static int goNext = 0;
+
+
+
+    private static int numAnswers;
 
     // Start is called before the first frame update
     void Start()
     {
-        signOneText = GameObject.Find("Canvas/Sign1/Sign1Button/Sign1Text").GetComponent<TextMeshProUGUI>();
-        signTwoText = GameObject.Find("Canvas/Sign2/Sign2Button/Sign2Text").GetComponent<TextMeshProUGUI>();
-
-       
-        //images.Add(panel.transform.FindChild("Image1").gameObject.GetComponent<Image>());
-        // images.Add(panel.transform.FindChild("Image2").gameObject.GetComponent<Image>());
-        // images.Add(panel.transform.FindChild("Image3").gameObject.GetComponent<Image>());
-        //  images.Add(panel.transform.FindChild("Image4").gameObject.GetComponent<Image>());
-        // images.Add(panel.transform.FindChild("Image5").gameObject.GetComponent<Image>());
-        // images.Add(panel.transform.FindChild("Image6").gameObject.GetComponent<Image>());
-
-        startGame();
+        destination = answerFrame.transform.position;
+        numAnswers = PlayerPrefs.GetInt("NumberOfAnswers");
+        images = new List<GameObject>();
+        images.Add(image1);
+        images.Add(image2);
+        images.Add(image3);
+        images.Add(image4);
+        images.Add(image5);
+        images.Add(image6);
+        images.Add(image7);
+        images.Add(image8);
+        images.Add(image9);
+        images.Add(image10);
+        loadNextQuestion();
+        //Update();
     }
 
-    public void startGame()
+
+    private void loadNextQuestion()
     {
-        int nextRandomAnswer = Random.Range(0, 5) + 1;
-        int nextRandomWrong = nextRandomAnswer;
-        while(nextRandomWrong == nextRandomAnswer)
+        foreach (GameObject obj in images)
         {
-            nextRandomWrong = Random.Range(0, 10) + 1;
+            obj.SetActive(false);
         }
-        print(images);
-        print(nextRandomAnswer);
-        image3.SetActive(true);
+        start = 0;
+        int nextRandomAnswer = UnityEngine.Random.Range(0, 10) + 1;
 
-        int nextRandomPicture = Random.Range(0, 21) + 1;
-        signOneText.text = nextRandomAnswer.ToString();
-        signTwoText.text = nextRandomWrong.ToString();
-        print(nextRandomAnswer);
+        pressed = null;
+
+        int nextRandomPicture = UnityEngine.Random.Range(0, 21) + 1;
+
+        triedAnswers = new List<GameObject>();
+
+        renderImages(nextRandomAnswer);
+        renderSigns(nextRandomAnswer);
     }
 
-    private void Update()
+    private void renderSigns(int nextRandomAnswer)
     {
-        if (Input.GetMouseButtonDown(0))
+        List<int> answers = new List<int>();
+
+
+        for (int i = 0; i < numAnswers - 1; i++)
         {
-            int nextRandomAnswer = Random.Range(0, 10) + 1;
-            int nextRandomWrong = nextRandomAnswer;
-            while (nextRandomWrong == nextRandomAnswer)
+            int random = UnityEngine.Random.Range(0, 10) + 1;
+            while (answers.Contains(random) || random == nextRandomAnswer)
             {
-                nextRandomWrong = Random.Range(0, 10) + 1;
+                random = UnityEngine.Random.Range(0, 10) + 1;
+            }
+            answers.Add(random);
+        }
+
+        int minMargin = 20;
+        int minWidth = 140;
+        int screenWidth = Screen.width;
+
+        float canvasX = canvas.GetComponent<Canvas>().transform.position.x;
+        float width = Mathf.Min(minWidth, (screenWidth - minMargin * (numAnswers + 1)) / numAnswers);
+        float height = width - 25;
+        float margin = Mathf.Max((screenWidth - width * numAnswers) / (numAnswers + 1), minMargin);
+
+        float leftMargin = (screenWidth - numAnswers * (width)) / (numAnswers + 1);
+        int leftBoundary = (screenWidth / 2) * (-1);
+
+        for (int index = 0; index < numAnswers; index++)
+        {
+            Button button = signs[index].GetComponent<Button>();
+            button.image.rectTransform.sizeDelta = new Vector2(width, height);
+            button.image.gameObject.SetActive(true);
+            button.interactable = true;
+            button.transform.GetChild(0).gameObject.SetActive(true);
+            Vector3 imgPos = button.image.rectTransform.position;
+            Vector3 newPosition = new Vector3(leftBoundary + width / 2 + leftMargin * (index + 1) + index * (width) + canvasX, imgPos.y, imgPos.z);
+            button.image.rectTransform.position = newPosition;
+            button.transform.GetChild(0).gameObject.transform.position = newPosition;
+        }
+
+        int randomRightSign = UnityEngine.Random.Range(0, numAnswers);
+        GameObject rightSign = signs[randomRightSign];
+
+        rightButton = signs[randomRightSign];
+
+        rightSign.GetComponentInChildren<TextMeshProUGUI>().SetText("" + nextRandomAnswer);
+        List<GameObject> wrongSigns = new List<GameObject>();
+
+        for (int i = 0, k = 0; i < numAnswers; i++)
+        {
+            if (i != randomRightSign)
+            {
+                wrongSigns.Add(signs[i]);
+                int wrongAns = answers[k++];
+                signs[i].GetComponentInChildren<TextMeshProUGUI>().SetText("" + wrongAns);
+            }
+        }
+    }
+
+    private void renderImages(int nextRandomAnswer)
+    {
+        int minMargin = 30;
+        int maxWidth = 120;
+        int screenWidth = Screen.width;
+        float canvasX = canvas.GetComponent<Canvas>().transform.position.x;
+        //print("Screen: " + screenWidth);
+
+        //float width = Mathf.Min(maxWidth, (screenWidth - sunImg.GetComponent<Image>().rectTransform.sizeDelta.x - minMargin * (nextRandomAnswer+1))/ nextRandomAnswer);
+        float width = Mathf.Min(maxWidth, (screenWidth - minMargin * (nextRandomAnswer + 1)) / nextRandomAnswer);
+        float height = width;
+        //float margin = Mathf.Max((screenWidth - sunImg.GetComponent<Image>().rectTransform.sizeDelta.x - width * nextRandomAnswer) / (nextRandomAnswer + 1), minMargin);
+        float margin = Mathf.Max((screenWidth - width * nextRandomAnswer) / (nextRandomAnswer + 1), minMargin);
+
+        float leftSpace = (screenWidth - nextRandomAnswer * (width + margin)) / 2;
+
+        //float leftMargin = ((screenWidth-sunImg.GetComponent<Image>().rectTransform.sizeDelta.x) - nextRandomAnswer * (width)) / (nextRandomAnswer + 1);
+        float leftMargin = ((screenWidth - nextRandomAnswer * (width)) / (nextRandomAnswer + 1));
+        int leftBoundary = (screenWidth / 2) * (-1);
+
+        //print("Width: " + width);
+        //print("margin : " + margin);
+        //print("Left Boundary:" + leftBoundary);
+        //print("Left marign: " + leftMargin);
+        for (int index = 0; index < nextRandomAnswer; index++)
+        {
+            Image image = images[index].GetComponent<Image>();
+            image.rectTransform.sizeDelta = new Vector2(width, height);
+            image.gameObject.SetActive(true);
+            Vector3 imgPos = image.rectTransform.position;
+            Vector3 newPosition = new Vector3(leftBoundary + width / 2 + leftMargin * (index + 1) + index * (width) + canvasX, imgPos.y, imgPos.z);
+            //print("x: " + newPosition.x + " y: " + newPosition.y + " z: " + newPosition.z);
+            image.rectTransform.position = newPosition;
+        }
+    }
+
+    public void onClick(GameObject pressedButton)
+    {
+        
+        foreach(GameObject obj in signs)
+        {
+            obj.GetComponent<Button>().interactable = false;
+        }
+        
+        if (pressed != null)
+        {
+            pressed.gameObject.SetActive(false);
+        }
+
+        pressed = pressedButton.GetComponentInChildren<TextMeshProUGUI>();
+
+
+        if (pressedButton.Equals(rightButton))
+        {
+            print("tocno");
+            goNext = 1;
+            answerColorImage.color = new Color32(4, 161, 14, 91);
+            shouldMove = 1;
+        } else {
+            triedAnswers.Add(pressedButton);
+            answerColorImage.color = new Color32(161, 26, 4, 121);
+            //pressedButton.SetActive(false);
+            Image img = pressedButton.GetComponent<Image>();
+            shouldMove = 1;
+            pressedButton.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    void IncrementPosition()
+    {
+        // Calculate the next position
+        float speed = 400;
+        float delta = speed * Time.deltaTime;
+        Vector3 currentPosition = pressed.rectTransform.position;
+        Vector3 nextPosition = Vector3.MoveTowards(currentPosition, destination, delta);
+
+        // Move the object to the next position
+        pressed.rectTransform.position = nextPosition;
+    }
+
+    void Update()
+    {
+        // If the object is not at the target destination
+        if (shouldMove == 1)
+        {
+            if (destination != pressed.rectTransform.position)
+            {
+                print("micem");
+                // Move towards the destination each frame until the object reaches it
+                IncrementPosition();
+            }
+            else
+            {
+                print("gotov");
+                if(goNext == 1)
+                {
+                    goNext = 0;
+                    shouldMove = 0;
+                    loadNextQuestion();
+                }
+                foreach(GameObject obj in signs)
+                {
+                    if (!triedAnswers.Contains(obj))
+                    {
+                        obj.GetComponent<Button>().interactable = true;
+                    }
+                }
+                shouldMove = 0;
             }
 
-            int nextRandomPicture = Random.Range(0, 21) + 1;
-            signOneText.text = nextRandomAnswer.ToString();
-            signTwoText.text = nextRandomWrong.ToString();
-            print(nextRandomAnswer);
         }
     }
+
 }

@@ -8,12 +8,11 @@ public class Pause : MonoBehaviour
 
     public GameObject pausePanelObject;
     public GameObject[] buttons;
+    public GameObject answerFrame;
 
     public void pausePanel()
     {
-        GameObject parent = GameObject.FindGameObjectWithTag("NumberCanvas");
-        pausePanelObject = parent.transform.Find("PausePanel").gameObject;
-
+        answerFrame.SetActive(false);
         pausePanelObject.SetActive(true);
 
         buttons = GameObject.FindGameObjectsWithTag("SignButtons");
@@ -30,5 +29,6 @@ public class Pause : MonoBehaviour
         {
             button.GetComponent<Button>().interactable = true;
         }
+        answerFrame.SetActive(true);
     }
 }

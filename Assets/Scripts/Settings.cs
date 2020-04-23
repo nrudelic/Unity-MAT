@@ -46,9 +46,9 @@ public class Settings : MonoBehaviour
         MusicToggle();
 
         //Values on enter
-        //numOfAnsGO = whichIsOn(numOfAnsToggles);
-        //numOfTasksGO = whichIsOn(numOfTasksToggles);
-        //musicGO = whichIsOn(musicToggle);
+        numOfAnsGO = whichIsOn(numOfAnsToggles);
+        numOfTasksGO = whichIsOn(numOfTasksToggles);
+        musicGO = whichIsOn(musicToggle);
 
 
 

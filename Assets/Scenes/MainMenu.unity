@@ -345,7 +345,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 34841285}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 62193192}
+        m_MethodName: SceneLoader
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &34841285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7637,7 +7648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e176ffedc1e5a429656f982cb4c75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsPanelObject: {fileID: 0}
+  settingsPanelObject: {fileID: 2121065121}
   menuButtons: []
   NumbOfTasks: {fileID: 0}
   music: {fileID: 1145084328}
@@ -7661,6 +7672,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5268304043197751959}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1145084329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145084328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430cf27d02d76f342b5a9ddb1fc003f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162590509
 GameObject:
   m_ObjectHideFlags: 0
@@ -12272,6 +12295,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5268304042061134652, guid: d55e6c005651f594cb84294c06a4c01d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5268304042061134653, guid: d55e6c005651f594cb84294c06a4c01d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12327,10 +12355,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5268304042061134654, guid: d55e6c005651f594cb84294c06a4c01d,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5268304042061134655, guid: d55e6c005651f594cb84294c06a4c01d,
         type: 3}
       propertyPath: m_Name
       value: Music
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5268304042061134652, guid: d55e6c005651f594cb84294c06a4c01d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d55e6c005651f594cb84294c06a4c01d, type: 3}

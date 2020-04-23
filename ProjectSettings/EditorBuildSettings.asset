@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NumbersScene.unity
     guid: dd1daae1e24f30c4e9be1dc9af7246c8
+  - enabled: 1
+    path: Assets/Scenes/SetsActivity.unity
+    guid: ddac202da2d56cd45997fb7d3c191949
   m_configObjects: {}

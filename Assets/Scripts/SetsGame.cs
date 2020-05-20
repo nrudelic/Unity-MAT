@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -34,6 +37,11 @@ public class SetsGame : MonoBehaviour
     private int goNext = 0;
 
 
+    private int roundsPlayed;
+    private int maxRounds;
+    private Stopwatch timer;
+    private bool answered;
+
     public void MyStarter()
     {
         resetScene();
@@ -42,6 +50,12 @@ public class SetsGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        roundsPlayed = 0;
+        timer = new Stopwatch();
+        timer.Start();
+        maxRounds = PlayerPrefs.GetInt("NumberOfTasks");
+        PlayerPrefs.SetInt("NumberOfRightAnswers", 0);
+        PlayerPrefs.SetInt("NumberOfWrongAnswers", 0);
         signEqualPosition = signEqual.transform.GetChild(0).gameObject.transform.position;
         signNotEqualPosition = signNotEqual.transform.GetChild(0).gameObject.transform.position;
         canvasSymbols = new List<GameObject>();
@@ -68,8 +82,20 @@ public class SetsGame : MonoBehaviour
                 {
                     goNext = 0;
                     shouldMove = 0;
-                    MyStarter();
-                    return;
+                    roundsPlayed++;
+                    if (roundsPlayed >= maxRounds && maxRounds != 0)
+                    {
+                        timer.Stop();
+                        TimeSpan elapsed = timer.Elapsed;
+                        PlayerPrefs.SetString("TotalTime", "" + elapsed.Minutes + ":" + elapsed.Seconds);
+                        PlayerPrefs.SetInt("NextScene", 3);
+                        SceneManager.LoadScene(5);
+                    }
+                    else
+                    {
+                        MyStarter();
+                        return;
+                    }
                 }
                 if (pressed.name.Equals("SignEqual"))
                 {
@@ -142,10 +168,11 @@ public class SetsGame : MonoBehaviour
 
     private void startGame()
     {
+        answered = false;
         setSymbolImage();
         int rightSymbols;
-        int leftSymbols = Random.Range(0, 11) + 1;
-        int num = Random.Range(0, 5) + 1;
+        int leftSymbols = UnityEngine.Random.Range(0, 11) + 1;
+        int num = UnityEngine.Random.Range(0, 5) + 1;
         if (num % 2 == 0)
         {
             rightSymbols = leftSymbols;
@@ -154,10 +181,10 @@ public class SetsGame : MonoBehaviour
         else
         {
             answer = false;
-            rightSymbols = Random.Range(0, 11) + 1;
+            rightSymbols = UnityEngine.Random.Range(0, 11) + 1;
             while (rightSymbols == leftSymbols)
             {
-                rightSymbols = Random.Range(0, 11) + 1;
+                rightSymbols = UnityEngine.Random.Range(0, 11) + 1;
             }
         }
 
@@ -400,7 +427,7 @@ public class SetsGame : MonoBehaviour
             {
                 float margin = Mathf.Max((widthSpace - width * symbols - width / 2) / (symbols + 1), minMargin);
                 positionX = canvasX + margin * (i + 1) + width * i + width / 2;
-                positionY = canvasHeight / 3 + canvasHeight / 6 + Random.Range(-20, 100);
+                positionY = canvasHeight / 3 + canvasHeight / 6 + UnityEngine.Random.Range(-20, 100);
             }
             else if (symbols == 4)
             {
@@ -408,19 +435,19 @@ public class SetsGame : MonoBehaviour
                 positionX = canvasX + width / 2 + margin * ((i % 2) + 1) + width * (i % 2);
                 if (i < 2)
                 {
-                    positionY = 2 * canvasHeight / 3 + (canvasHeight / 6) + Random.Range(-50, 50);
+                    positionY = 2 * canvasHeight / 3 + (canvasHeight / 6) + UnityEngine.Random.Range(-50, 50);
 
                 }
                 else
                 {
 
-                    positionY = canvasHeight / 3 + (canvasHeight / 6) + Random.Range(-50, 50);
+                    positionY = canvasHeight / 3 + (canvasHeight / 6) + UnityEngine.Random.Range(-50, 50);
                 }
             }
             else if (symbols < 9)
             {
-                positionX = canvasX + width / 2 + (i % 3) * (widthSpace / 3) + Random.Range(0, widthSpace / 3 - width + 20);
-                positionY = canvasHeight - height / 2 - ((i / 3) * (2 * canvasHeight / (3 * 3))) - Random.Range(0, (2 * canvasHeight / (3 * 3)) - height + 20);
+                positionX = canvasX + width / 2 + (i % 3) * (widthSpace / 3) + UnityEngine.Random.Range(0, widthSpace / 3 - width + 20);
+                positionY = canvasHeight - height / 2 - ((i / 3) * (2 * canvasHeight / (3 * 3))) - UnityEngine.Random.Range(0, (2 * canvasHeight / (3 * 3)) - height + 20);
             }
 
             newSymbol.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(width - 20, height - 20);
@@ -461,7 +488,7 @@ public class SetsGame : MonoBehaviour
             {
                 float margin = Mathf.Max((widthSpace - width * symbols - width / 2) / (symbols + 1), minMargin);
                 positionX = canvasX + answerWidth / 2 + margin * (i + 1) + width * i + width / 2;
-                positionY = canvasHeight / 3 + canvasHeight / 6 + Random.Range(-20, 100);
+                positionY = canvasHeight / 3 + canvasHeight / 6 + UnityEngine.Random.Range(-20, 100);
             }
             else if (symbols == 4)
             {
@@ -469,19 +496,19 @@ public class SetsGame : MonoBehaviour
                 positionX = canvasX + answerWidth / 2 + width / 2 + margin * ((i % 2) + 1) + width * (i % 2);
                 if (i < 2)
                 {
-                    positionY = 2 * canvasHeight / 3 + (canvasHeight / 6) + Random.Range(-50, 20);
+                    positionY = 2 * canvasHeight / 3 + (canvasHeight / 6) + UnityEngine.Random.Range(-50, 20);
 
                 }
                 else
                 {
 
-                    positionY = canvasHeight / 3 + (canvasHeight / 6) + Random.Range(-50, 50);
+                    positionY = canvasHeight / 3 + (canvasHeight / 6) + UnityEngine.Random.Range(-50, 50);
                 }
             }
             else if (symbols < 9)
             {
-                positionX = canvasX + answerWidth / 2 + width / 2 + (i % 3) * (widthSpace / 3) + Random.Range(0, 15);
-                positionY = canvasHeight - height / 2 - ((i / 3) * (2 * canvasHeight / (3 * 3))) - Random.Range(-15, 15);
+                positionX = canvasX + answerWidth / 2 + width / 2 + (i % 3) * (widthSpace / 3) + UnityEngine.Random.Range(0, 15);
+                positionY = canvasHeight - height / 2 - ((i / 3) * (2 * canvasHeight / (3 * 3))) - UnityEngine.Random.Range(-15, 15);
             }
 
             newSymbol.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(width - 20, height - 20);
@@ -504,11 +531,20 @@ public class SetsGame : MonoBehaviour
         {
             if (answer == true)
             {
+                if(answered == false)
+                {
+                    PlayerPrefs.SetInt("NumberOfRightAnswers", PlayerPrefs.GetInt("NumberOfRightAnswers") + 1);
+                }
                 goNext = 1;
                 answerColorImage.color = new Color32(4, 161, 14, 91);
             }
             else if (answer == false)
             {
+                if(answered == false)
+                {
+                    PlayerPrefs.SetInt("NumberOfWrongAnswers", PlayerPrefs.GetInt("NumberOfWrongAnswers") + 1);
+
+                }
                 answerColorImage.color = new Color32(161, 26, 4, 121);
                 pressedButton.GetComponent<Button>().interactable = false;
             }
@@ -518,17 +554,27 @@ public class SetsGame : MonoBehaviour
         {
             if (answer == true)
             {
+                if(answered == false)
+                {
+                    PlayerPrefs.SetInt("NumberOfWrongAnswers", PlayerPrefs.GetInt("NumberOfWrongAnswers") + 1);
+                }
                 answerColorImage.color = new Color32(161, 26, 4, 121);
                 pressedButton.GetComponent<Button>().interactable = false;
             }
             else if (answer == false)
             {
+                if(answered == false)
+                {
+                    PlayerPrefs.SetInt("NumberOfRightAnswers", PlayerPrefs.GetInt("NumberOfRightAnswers") + 1);
+
+                }
                 goNext = 1;
                 answerColorImage.color = new Color32(4, 161, 14, 91);
                 shouldMove = 1;
             }
             shouldMove = 1;
         }
+        answered = true;
     }
 }
 

@@ -1,11 +1,13 @@
 Win64
 PlayerPath?
-C:/Users/User/Desktop/Završni_v0.1.exe
+H:/zavrsni backup/Matematički_vrtuljak/Završni_v0.1.exe
 SceneListBegin?
 Assets/Scenes/LoadingScene.unity
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/NumbersScene.unity
 Assets/Scenes/SetsActivity.unity
+Assets/Scenes/OperationsScene.unity
+Assets/Scenes/RoundSummary.unity
 SceneListEnd?
 3c08375166df118bd1801438fc36b92f Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 77c21079ace8d76ce6e941d3dabbfe6e Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -57,6 +59,7 @@ aa165095bcf0f4d99594ea33df01c81b UnityEngine.UI.dll:UnityEngine.UI.Slider
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+1028c39545bcfa841aaab54121e69a47 Assembly-CSharp.dll:.toNumberDiffStandard
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -127,7 +130,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 8e1617ba7d48e626d5c6d610e4febf8a Assembly-CSharp.dll:DFTGames.Localization.Localize
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-f095fd7ae1ce46b23b921fa88f48d401 Assembly-CSharp.dll:.ToggleTypeAns
+51932a0a824b42a90a47af8ae706ebe2 Assembly-CSharp.dll:.ToggleTypeAns
 c98bb9140d0f96e2714205f29a5fb574 Assembly-CSharp.dll:.NumbersGame
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -144,7 +147,8 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Audio
-42a82ad2ed1194c82f7d9d7d02fd8db7 Assembly-CSharp.dll:.SetsGame
+673c92adc7ce58dfcc6bb7bb82720df0 Assembly-CSharp.dll:.SetsGame
+315c826f4a0125d9180882fd0d5e953f Assembly-CSharp.dll:.Summary
 35a9693c388776aaf487636491a20f11 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 f095fd7ae1ce46b23b921fa88f48d401 Assembly-CSharp.dll:.AnswerToggle
@@ -164,11 +168,17 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 f119f3ac93ce248a4a05e14e76e54885 Assembly-CSharp.dll:.Pause
 8e1617ba7d48e626d5c6d610e4febf8a Assembly-CSharp.dll:DFTGames.Localization.LocalizeTM
+b8be83b770c658e36f5e931497a37e7d Assembly-CSharp.dll:.OperationsGame
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+2a603501f45359b7e2e601dd2d59af39 Assembly-CSharp.dll:.SetsPause
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.toNumberDiff
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BGSoundScript
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
+528898dedf8d689dc6fb13cda86c9c21 Assembly-CSharp.dll:.SliderValue
 df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-4be5fc6ae00e05666893fbf668f889b6 Assembly-CSharp.dll:.Settings
+b37391050a3f238d6cb9b2cbd1bf5f50 Assembly-CSharp.dll:.OperationSettings
+86311a847ace71aa4dbff3bb11e1e04e Assembly-CSharp.dll:.Settings

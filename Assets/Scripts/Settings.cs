@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
+using System;
+using System.Security.Cryptography.X509Certificates;
 
 public class Settings : MonoBehaviour
 {
@@ -10,25 +13,40 @@ public class Settings : MonoBehaviour
     public GameObject[] menuButtons;
     public ToggleGroup NumbOfTasks;
 
+    public TMP_InputField toNumberInput;
+    
     private GameObject[] numOfTasksToggles;
     private GameObject[] numOfAnsToggles;
     private GameObject[] musicToggle;
+    public GameObject[] operationToggles;
 
     private GameObject numOfTasksGO;
     private GameObject numOfAnsGO;
     private GameObject musicGO;
+    private GameObject typeAnsGO;
     
     private GameObject numOfTasksGONew;
     private GameObject numOfAnsGONew;
     private GameObject musicGONew;
+    private GameObject typeOfAnswer;
+    private GameObject typeOfAnswerNew;
+
+    public Toggle addition, substraction, multiplication, division;
+
+    public GameObject[] typeOfAns;
 
     public GameObject music;
+    public Slider slider;
+    public TextMeshProUGUI sliderText;
+    private int SliderValueOnEntry;
 
+    private List<Toggle> operationEntry;
+    
     public void settingsPanel()
     {
         GameObject gameOverParent = GameObject.Find("Canvas");
         settingsPanelObject = gameOverParent.transform.Find("SettingsPanel").gameObject;
-
+        sliderText.text = slider.value.ToString();
         if (!(settingsPanelObject is null)){
             settingsPanelObject.SetActive(true);
         }else{
@@ -44,18 +62,49 @@ public class Settings : MonoBehaviour
         NumberOfAnsToggle();
         NumberOfTasksToggle();
         MusicToggle();
+        TypeOfAnswer();
+        OperationsToggle();
 
         //Values on enter
         numOfAnsGO = whichIsOn(numOfAnsToggles);
         numOfTasksGO = whichIsOn(numOfTasksToggles);
         musicGO = whichIsOn(musicToggle);
+        SliderValueOnEntry = (int) slider.value;
+        typeAnsGO = whichIsOn(typeOfAns);
+        operationEntry = new List<Toggle>();
 
-
-
+        if (addition.isOn) operationEntry.Add(addition);
+        if (substraction.isOn) operationEntry.Add(substraction);
+        if (multiplication.isOn) operationEntry.Add(multiplication);
+        if (division.isOn) operationEntry.Add(division);
+        
+        
         menuButtons = GameObject.FindGameObjectsWithTag("MenuButton");
         foreach(GameObject button in menuButtons)
         {
             button.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    private void TypeOfAnswer()
+    {
+        foreach(GameObject typeToggle in typeOfAns){
+            Toggle toggle = typeToggle.GetComponent<Toggle>();
+            ColorBlock color = toggle.colors;
+            if (toggle.isOn)
+            {
+                typeOfAnswer = typeToggle;
+                color.normalColor = Color.blue;
+                color.pressedColor = Color.blue;
+                color.highlightedColor = Color.blue;
+            }
+            else
+            {
+                color.normalColor = Color.white;
+                color.pressedColor = Color.white;
+                color.highlightedColor = Color.white;
+            }
+            toggle.colors = color;
         }
     }
 
@@ -118,6 +167,28 @@ public class Settings : MonoBehaviour
 
     }
 
+    public void OperationsToggle()
+    {
+        foreach(GameObject toggleObj in operationToggles)
+        {
+            Toggle toggle = toggleObj.GetComponent<Toggle>();
+            ColorBlock color = toggle.colors;
+            if (toggle.isOn)
+            {
+                color.normalColor = Color.blue;
+                color.pressedColor = Color.blue;
+                color.highlightedColor = Color.blue;
+            }
+            else
+            {
+                color.normalColor = Color.white;
+                color.pressedColor = Color.white;
+                color.highlightedColor = Color.white;
+            }
+            toggle.colors = color;
+        }
+    }
+
     public void NumberOfAnsToggle()
     {
         foreach (GameObject toggleGameObj in numOfAnsToggles)
@@ -162,7 +233,6 @@ public class Settings : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Music", 0);
                 }
-                print(PlayerPrefs.GetInt("Music"));
             }
             else
             {
@@ -180,11 +250,16 @@ public class Settings : MonoBehaviour
         numOfTasksGO.GetComponent<Toggle>().isOn = true;
         musicGO.GetComponent<Toggle>().isOn = true;
         numOfAnsGO.GetComponent<Toggle>().isOn = true;
-
+        typeAnsGO.GetComponent<Toggle>().isOn = true;
+        slider.value = SliderValueOnEntry;
         settingsPanelObject.SetActive(false);
         foreach (GameObject button in menuButtons)
         {
             button.GetComponent<Button>().interactable = true;
+        }
+        foreach(Toggle toggle in operationEntry)
+        {
+            toggle.isOn = true;
         }
     }
 
@@ -198,7 +273,10 @@ public class Settings : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("Music", 0);
-            music.SetActive(false);
+            if (music != null)
+            {
+                music.SetActive(false);
+            }
         }
 
         int numberOfAnsInt = FindValueNumOfAns(numOfAnsGONew.name);
@@ -211,6 +289,44 @@ public class Settings : MonoBehaviour
         foreach (GameObject button in menuButtons)
         {
             button.GetComponent<Button>().interactable = true;
+        }
+
+        PlayerPrefs.SetInt("toNumber", Int32.Parse(sliderText.text));
+        TypeOfAnswer();
+        FindTypeOfAnswer(typeOfAnswer.name);
+        PlayerPrefs.SetInt("toNumber",(int) slider.value);
+
+        //Getting viable operations
+        if (addition.isOn)
+        {
+            PlayerPrefs.SetInt("Addition", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Addition", 0);
+        }if (substraction.isOn)
+        {
+            PlayerPrefs.SetInt("Substraction", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Substraction", 0);
+        }
+        if (multiplication.isOn)
+        {
+            PlayerPrefs.SetInt("Multiplication", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Multiplication", 0);
+        }
+        if (division.isOn)
+        {
+            PlayerPrefs.SetInt("Division", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Division", 0);
         }
     }
 
@@ -232,6 +348,22 @@ public class Settings : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void FindTypeOfAnswer(String name)
+    {
+        if (name.Equals("NumbersOption"))
+        {
+            PlayerPrefs.SetString("typeOfAnswer", "Numbers");
+        }
+        else if (name.Equals("SymbolsOption"))
+        {
+            PlayerPrefs.SetString("typeOfAnswer", "Symbols");
+        }
+        else if (name.Equals("BlocksOption"))
+        {
+            PlayerPrefs.SetString("typeOfAnswer", "Blocks");
+        }
     }
 
     private int FindValueNumOfAns(string name)

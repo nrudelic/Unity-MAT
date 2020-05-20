@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class NumbersGame : MonoBehaviour
 {
@@ -30,16 +32,24 @@ public class NumbersGame : MonoBehaviour
     private int shouldMove = 0;
     private static List<GameObject> triedAnswers;
     private static int goNext = 0;
-
-
+    
+    private int roundsPlayed;
+    private int maxRounds;
+    private Stopwatch timer;
 
     private static int numAnswers;
 
     // Start is called before the first frame update
     void Start()
     {
+        roundsPlayed = 0;
+        timer = new Stopwatch();
+        timer.Start();
+        maxRounds = PlayerPrefs.GetInt("NumberOfTasks");
         destination = answerFrame.transform.position;
         numAnswers = PlayerPrefs.GetInt("NumberOfAnswers");
+        PlayerPrefs.SetInt("NumberOfRightAnswers", 0);
+        PlayerPrefs.SetInt("NumberOfWrongAnswers", 0);
         images = new List<GameObject>();
         images.Add(image1);
         images.Add(image2);
@@ -188,11 +198,19 @@ public class NumbersGame : MonoBehaviour
 
         if (pressedButton.Equals(rightButton))
         {
+            if (triedAnswers.Count == 0)
+            {
+                PlayerPrefs.SetInt("NumberOfRightAnswers", PlayerPrefs.GetInt("NumberOfRightAnswers") + 1);
+            }
             print("tocno");
             goNext = 1;
             answerColorImage.color = new Color32(4, 161, 14, 91);
             shouldMove = 1;
         } else {
+            if (triedAnswers.Count == 0)
+            {
+                PlayerPrefs.SetInt("NumberOfWrongAnswers", PlayerPrefs.GetInt("NumberOfWrongAnswers") + 1);
+            }
             triedAnswers.Add(pressedButton);
             answerColorImage.color = new Color32(161, 26, 4, 121);
             //pressedButton.SetActive(false);
@@ -232,7 +250,18 @@ public class NumbersGame : MonoBehaviour
                 {
                     goNext = 0;
                     shouldMove = 0;
-                    loadNextQuestion();
+                    roundsPlayed++;
+                    if(roundsPlayed >= maxRounds && maxRounds != 0)
+                    {
+                        timer.Stop();
+                        TimeSpan elapsed = timer.Elapsed;
+                        PlayerPrefs.SetString("TotalTime", "" + elapsed.Minutes + ":" + elapsed.Seconds);
+                        PlayerPrefs.SetInt("NextScene", 2);
+                        SceneManager.LoadScene(5);
+                    } else
+                    {
+                        loadNextQuestion();
+                    }
                 }
                 foreach(GameObject obj in signs)
                 {

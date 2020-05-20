@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SetsActivity.unity
     guid: ddac202da2d56cd45997fb7d3c191949
+  - enabled: 1
+    path: Assets/Scenes/OperationsScene.unity
+    guid: 45bd597601df1904c93c987953b92cbf
+  - enabled: 1
+    path: Assets/Scenes/RoundSummary.unity
+    guid: 2d38e25f27530d1468c1280960459f19
   m_configObjects: {}

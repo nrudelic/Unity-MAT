@@ -27,6 +27,8 @@ public class OperationsGame : MonoBehaviour
     }
 
     public GameObject canvas;
+    public AudioSource correct;
+    public AudioSource wrong;
     public TextMeshProUGUI firstOperand, secondOperand;
     public Image firstImage, secondImage;
     public TextMeshProUGUI operationText;
@@ -104,7 +106,7 @@ public class OperationsGame : MonoBehaviour
     {
         triedAnswers = new List<GameObject>();
         pressed = null;
-
+        answerColorImage.color = new Color32(255, 255, 255, 0);
         operation = operations[UnityEngine.Random.Range(0, operations.Count)];
         SetOperationText();
         GetRandomOperandsDependingOnOperation();
@@ -427,8 +429,10 @@ public class OperationsGame : MonoBehaviour
                 PlayerPrefs.SetInt("NumberOfRightAnswers", PlayerPrefs.GetInt("NumberOfRightAnswers") + 1);
             }
             goNext = 1;
+            print("tocno");
             answerColorImage.color = new Color32(4, 161, 14, 91);
             shouldMove = 1;
+            correct.Play();
         } 
         else 
         {
@@ -441,6 +445,7 @@ public class OperationsGame : MonoBehaviour
             //pressedButton.SetActive(false);
             Image img = pressedButton.GetComponent<Image>();
             shouldMove = 1;
+            wrong.Play();
             pressedButton.GetComponent<Button>().interactable = false;
         }
     }

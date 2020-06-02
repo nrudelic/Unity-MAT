@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace DFTGames.Localization
@@ -25,18 +26,17 @@ namespace DFTGames.Localization
                 if (value != null && value.Trim() != string.Empty)
                 {
                     currentLanguage = value;
-
-                    if (Application.systemLanguage == SystemLanguage.French)
+                    if (value.Equals(SystemLanguage.French.ToString()))
                     {
                         currentLanguage = SystemLanguage.French.ToString();
                     }
-                    else if (Application.systemLanguage == SystemLanguage.English)
+                    else if (value.Equals(SystemLanguage.English.ToString()))
                     {
                         currentLanguage = SystemLanguage.English.ToString();
-                    }else if (Application.systemLanguage == SystemLanguage.SerboCroatian)
+                    }else if (value.Equals(SystemLanguage.SerboCroatian.ToString()))
                     {
                         currentLanguage = SystemLanguage.SerboCroatian.ToString();
-                    }else if (Application.systemLanguage == SystemLanguage.Spanish)
+                    }else if (value.Equals(SystemLanguage.Spanish.ToString()))
                     {
                         currentLanguage = SystemLanguage.Spanish.ToString();
                     }
@@ -45,19 +45,18 @@ namespace DFTGames.Localization
                         currentLanguage = SystemLanguage.English.ToString();
                     }
 
+                    currentLanguageHasBeenSet = true;
 
-
+                    Debug.Log(STR_LOCALIZATION_PREFIX + currentLanguage);
                     currentLocalizationText = Resources.Load(STR_LOCALIZATION_PREFIX + currentLanguage, typeof(TextAsset)) as TextAsset;
+
                     if (currentLocalizationText == null)
                     {
-                        Debug.LogWarningFormat("Missing locale '{0}', loading English.", currentLanguage);
                         currentLanguage = SystemLanguage.English.ToString();
                         currentLocalizationText = Resources.Load(STR_LOCALIZATION_PREFIX + currentLanguage, typeof(TextAsset)) as TextAsset;
                     }
                     if (currentLocalizationText != null)
                     {
-                        //currentLanguageFileHasBeenFound = true;
-                        // We wplit on newlines to retrieve the key pairs
                         string[] lines = currentLocalizationText.text.Split(new string[] { "\r\n", "\n\r", "\n" }, System.StringSplitOptions.RemoveEmptyEntries);
                         CurrentLanguageStrings.Clear();
                         for (int i = 0; i < lines.Length; i++)
@@ -83,6 +82,10 @@ namespace DFTGames.Localization
             get
             {
                 return currentLanguageHasBeenSet;
+            }
+            set
+            {
+                currentLanguageHasBeenSet = value;
             }
         }
 

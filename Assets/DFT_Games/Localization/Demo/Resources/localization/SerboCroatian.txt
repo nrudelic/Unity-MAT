@@ -1,0 +1,13 @@
+﻿settings=POSTAVKE
+tasknumber=BROJ ZADATAKA:
+ansnumber=BROJ ODGOVORA:
+music=GLAZBA:
+language=JEZIK:
+opsettings=POSTAVKE ZA IGRU "OPERACIJE"
+numorsym=BROJEVI ILI SIMBOLI:
+upto=ZADACI DO BROJA
+enaop=OMOGUĆI OPERACIJE:
+giveup=ODUSTANI
+save=SPREMI
+about=Aplikacija je nastala u okviru projekta "ICT sustavi za osobe sa složenim komunikacijskim potrebama" koji je financirao Fond za razvoj Sveučilišta u Zagrebu, 2012. godine. Aplikacije je dorađena u okviru IPA projekta "Kompetencijska mreža zasnovana na informacijsko-komunikacijskim tehnologijama za inovativne usluge namijenjene osobama sa složenim komunikacijskim potrebama" (www.ict-aac.hr).\n\nKorišteni elementi zvuka i grafike preuzeti su sa stranica:\n\n-ARASAAC: Korišteni slikovni simboli su vlasništvo CATEDU (http://catedu.es/arasaac/) prema licenci Creative Commons (http://creativecommons.org/licenses/by-nc-sa/3.0/). Autor simbola je Sergio Palao.\n-OpenGameArt.org (http://opengameart.org)\n\nOva publikacija je izrađena uz pomoć Europske unije. Sadržaj ove publikacije isključiva je odgovornost Fakulteta elektrotehnike i računarstva i partnerskih institucija te ne odražava nužno gledište Europske unije.
+aboutclose=NAZAD

@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class SetsGame : MonoBehaviour
 {
     public GameObject answerFrame;
+    public AudioSource correct;
+    public AudioSource wrong;
     public GameObject symbol;
     public GameObject canvas;
     public Image answerColorImage;
@@ -200,6 +202,18 @@ public class SetsGame : MonoBehaviour
 
     private void renderWithFixedSymbols(int numberOfSymbols, GameObject[] symbols, int side)
     {
+        List<int> usedIndexes = new List<int>();
+        for (int i = 0; i < numberOfSymbols;){
+            int randomIndex = UnityEngine.Random.Range(0, 11);
+            print("rand:" + randomIndex);
+            if(!usedIndexes.Contains(randomIndex)){
+                symbols[randomIndex].SetActive(true);
+                usedIndexes.Add(randomIndex);
+                i++;
+            }
+        }
+
+        /*
         if (numberOfSymbols == 1)
         {
             symbols[7].SetActive(true);
@@ -392,7 +406,7 @@ public class SetsGame : MonoBehaviour
             }
         }
 
-
+    */
 
     }
     private void renderLeft(int symbols)
@@ -536,6 +550,7 @@ public class SetsGame : MonoBehaviour
                     PlayerPrefs.SetInt("NumberOfRightAnswers", PlayerPrefs.GetInt("NumberOfRightAnswers") + 1);
                 }
                 goNext = 1;
+                correct.Play();
                 answerColorImage.color = new Color32(4, 161, 14, 91);
             }
             else if (answer == false)
@@ -545,6 +560,7 @@ public class SetsGame : MonoBehaviour
                     PlayerPrefs.SetInt("NumberOfWrongAnswers", PlayerPrefs.GetInt("NumberOfWrongAnswers") + 1);
 
                 }
+                wrong.Play();
                 answerColorImage.color = new Color32(161, 26, 4, 121);
                 pressedButton.GetComponent<Button>().interactable = false;
             }
@@ -560,6 +576,7 @@ public class SetsGame : MonoBehaviour
                 }
                 answerColorImage.color = new Color32(161, 26, 4, 121);
                 pressedButton.GetComponent<Button>().interactable = false;
+                wrong.Play();
             }
             else if (answer == false)
             {
@@ -571,6 +588,7 @@ public class SetsGame : MonoBehaviour
                 goNext = 1;
                 answerColorImage.color = new Color32(4, 161, 14, 91);
                 shouldMove = 1;
+                correct.Play();
             }
             shouldMove = 1;
         }

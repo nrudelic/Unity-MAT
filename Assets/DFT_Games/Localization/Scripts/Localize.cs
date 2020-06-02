@@ -33,8 +33,6 @@ namespace DFTGames.Localization
 
         #endregion
 
-
-
         #region Public Methods
 
         /// <summary>

@@ -1,0 +1,13 @@
+﻿settings=CONFIGURAÇÕES
+tasknumber=NÚMERO DE RONDAS:
+ansnumber=NÚMERO DE RESPOSTAS:
+music=MÚSICA:
+language=IDIOMA:
+opsettings=CONFIGURAÇÕES DO JOGO "OPERAÇÕES"
+numorsym=NÚMERO DE SÍMBOLOS:
+upto=TAREFAS ATÉ AO NÚMERO
+enaop=ATIVAR OPERAÇÕES:
+giveup=CANCELAR
+save=SALVAR
+about=A aplicação foi desenvolvida como parte do projeto "Sistemas TIC para pessoas com necessidades complexas de comunicação" que foi financiado pelo Fundo de Desenvolvimento da Universidade de Zagreb. A aplicação foi delineada como parte do projeto IPA "Rede de Competências em TIC para Serviços Inovadores para Pessoas com Necessidades Complexas de Comunicação".\n\nSom e elementos gráficos foram descarregados a partir de:\n\n-ARASAAC: Os símbolos utilizados são propriedade da CATEDU (http://catedu.es/arasaac/) sob licença da Creative Commons (http://creativecommons.org/licenses/by-nc-sa/3.0/). O autor dos símbolos é Sergio Palao.\n-OpenGameArt.org (http://opengameart.org)\n\nEsta publicação foi produzida com o suporte da União Europeia. O conteúdo desta publicação é de exclusiva responsabilidade da Faculdade de Engenharia Eléctrica e Computação e das instituições parceiras e não reflete necessariamente as opiniões da União Europeia.
+aboutclose=FECHAR

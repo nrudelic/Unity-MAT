@@ -53,6 +53,8 @@ namespace DFTGames.Localization
         {
             // The first Text object getting here inits the CultureInfo data and loads the language file,
             // if any
+            Locale.currentLanguageHasBeenSet = false;
+
             if (!Locale.currentLanguageHasBeenSet)
             {
                 Locale.currentLanguageHasBeenSet = true;
@@ -82,6 +84,7 @@ namespace DFTGames.Localization
         {
             Locale.CurrentLanguage = language.ToString();
             Locale.PlayerLanguage = language;
+            print("language: " + Locale.PlayerLanguage);
             Localize[] allTexts = GameObject.FindObjectsOfType<Localize>();
             LocalizeTM[] allTextsTM = GameObject.FindObjectsOfType<LocalizeTM>();
             for (int i = 0; i < allTexts.Length; i++)

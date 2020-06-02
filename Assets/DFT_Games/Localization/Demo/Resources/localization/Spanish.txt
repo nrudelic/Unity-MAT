@@ -1,1 +1,13 @@
-﻿title=NASLOVIA
+﻿settings=AJUSTES
+tasknumber=NÚMERO DE RONDAS:
+ansnumber=NÚMERO DE RESPUESTAS:
+music=MÚSICA:
+language=IDIOMA:
+opsettings=ADJUSTES DE JUEGO "OPERACIONES"
+numorsym=NÚMEROS O SÍMBOLOS:
+upto=TAREAS HASTA EL NÚMERO
+enaop=ACTIVAR OPERACIONES:
+giveup=CANCELAR
+save=SALVAR
+about=La aplicación se desarrolló como parte del proyecto "Sistemas de TIC para personas con necesidades de comunicación complejas" financiado por el Fondo de Desarrollo de la Universidad de Zagreb. La aplicación fue desarrollada como parte del proyecto IPA "Red de competencia de las TIC para servicios innovadores para personas con necesidades complejas de comunicación".\n\nLos elementos de sonido y gráficos se descargaron de:\n\n-ARASAAC: Los símbolos utilizados son propiedad de CATEDU (http://catedu.es/arasaac/) bajo la licencia Creative Commons (http://creativecommons.org/licenses/by-nc-sa/3.0/). El autor de los símbolos es Sergio Palao.\n-OpenGameArt.org (http://opengameart.org)\n\nEsta publicación ha sido producida con la asistencia de la Unión Europea. El contenido de esta publicación es responsabilidad exclusiva de la Facultad de Ingeniería Eléctrica y Computación y las instituciones asociadas, y no refleja necesariamente los puntos de vista de la Unión Europea.
+aboutclose=CERRAR

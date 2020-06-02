@@ -1,0 +1,13 @@
+﻿settings=BEÁLLÍTÁSOK
+tasknumber=MENETEK SZÁMA:
+ansnumber=VÁLASZOK SZÁMA:
+music=ZENE:
+language=NYELV:
+opsettings=A "MÜVELETEK" JÁTÉK BEÁLLÍTÁSAI
+numorsym=SZÁMOK VAGY SZIMBÓLUMOK:
+upto=FELADATOK AZ ADOTT SZÁMIG
+enaop=ELÉRHETŐ MŰVELETEK:
+giveup=MÉGSEM
+save=MENTÉS
+about=Az applikáció a Zágrábi Egyetem Fejlesztési Alapjának támogatásával az "ICT systems for persons with complex communication needs" projekt keretében készült. Az applikáció az "ICT Competence Network for Innovative Services for Persons with Complex Communication Needs" című IPA projektkeretében átdolgozásra került.\n\nA hanganyag és a grafikus elemek letöltési helye:\n\n-ARASAAC: A használt szimbólumok a CATEDU tulajdonát képezik (http://catedu.es/arasaac/), Creative Commons licenc szerint (http://creativecommons.org/licenses/by-nc-sa/3.0/). A szimbólumok tervezője Sergio Palao.\n-OpenGameArt.org (http://opengameart.org)\n\nA kiadvány az Európai Unió támogatásával készült. A kiadvány tartalmáért a Villamosmérnöki és Informatikai Kar és a partner intézmények vállalnak kizárólagos felelősséget, amely nem feltétlenül egyezik meg az Európai Unió álláspontjával.
+aboutclose=BEZÁR

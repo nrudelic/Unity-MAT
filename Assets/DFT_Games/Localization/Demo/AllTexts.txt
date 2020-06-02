@@ -10,3 +10,5 @@ Il mio grande gioco
 Gioca
 Impostazioni
 Informazioni
+title
+playa

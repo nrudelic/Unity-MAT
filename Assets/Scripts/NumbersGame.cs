@@ -38,6 +38,8 @@ public class NumbersGame : MonoBehaviour
     private Stopwatch timer;
 
     private static int numAnswers;
+    public AudioSource correct;
+    public AudioSource wrong;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +70,7 @@ public class NumbersGame : MonoBehaviour
 
     private void loadNextQuestion()
     {
+        answerColorImage.color = new Color32(255, 255, 255, 0);
         foreach (GameObject obj in images)
         {
             obj.SetActive(false);
@@ -206,6 +209,7 @@ public class NumbersGame : MonoBehaviour
             goNext = 1;
             answerColorImage.color = new Color32(4, 161, 14, 91);
             shouldMove = 1;
+            correct.Play();
         } else {
             if (triedAnswers.Count == 0)
             {
@@ -216,6 +220,7 @@ public class NumbersGame : MonoBehaviour
             //pressedButton.SetActive(false);
             Image img = pressedButton.GetComponent<Image>();
             shouldMove = 1;
+            wrong.Play();
             pressedButton.GetComponent<Button>().interactable = false;
         }
     }
@@ -223,7 +228,7 @@ public class NumbersGame : MonoBehaviour
     void IncrementPosition()
     {
         // Calculate the next position
-        float speed = 400;
+        float speed = 500;
         float delta = speed * Time.deltaTime;
         Vector3 currentPosition = pressed.rectTransform.position;
         Vector3 nextPosition = Vector3.MoveTowards(currentPosition, destination, delta);

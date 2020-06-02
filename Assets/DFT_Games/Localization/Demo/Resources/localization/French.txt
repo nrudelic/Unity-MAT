@@ -1,0 +1,13 @@
+﻿settings=PARAMÈTRES
+tasknumber=NOMBRE DE TOURS:
+ansnumber=NOMBRE DE RÉPONSES:
+music=MUSIQUE:
+language=LANGUE:
+opsettings="OPÉRATIONS" PARAMÉTRAGES DU JEU
+numorsym=NOMBRES OU SYMBOLES:
+upto=DES TÂCHES JUSQU'AU NOMBRE
+enaop=PERMETTRE LES OPÉRATIONS:
+giveup=ANNULER
+save=SAUVEGARDER
+about=L'application a été développée dans le cadre du projet "Systèmes TIC pour les personnes ayant des besoins complexes de communication" qui a été financé par le Fonds de développement de l'Université de Zagreb. L'application a été révisée dans le cadre du projet IPA "Réseau de compétences en TIC pour des services innovants pour les personnes ayant des besoins complexes de communication".\n\nDes éléments sonores et graphiques ont été téléchargés de:\n\n-ARASAAC: Les symboles utilisés sont la propriété de CATEDU (http://catedu.es/arasaac/) sous la licence Creative Commons (http://creativecommons.org/licenses/by-nc-sa/3.0/). L'auteur des symboles est Sergio Palao.\n-OpenGameArt.org (http://opengameart.org)\n\nCette publication a été réalisée avec l'aide de l'Union européenne. Le contenu de cette publication relève de la seule responsabilité de la Faculté de génie électrique et d'informatique et des institutions partenaires et ne reflète pas nécessairement les vues de l'Union européenne.
+aboutclose=FERMER

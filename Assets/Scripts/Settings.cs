@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using DFTGames.Localization;
+using System.Linq;
 
 public class Settings : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class Settings : MonoBehaviour
     private GameObject[] numOfAnsToggles;
     private GameObject[] musicToggle;
     public GameObject[] operationToggles;
+    public GameObject[] languageToggles;
 
     private GameObject numOfTasksGO;
     private GameObject numOfAnsGO;
@@ -30,6 +33,7 @@ public class Settings : MonoBehaviour
     private GameObject musicGONew;
     private GameObject typeOfAnswer;
     private GameObject typeOfAnswerNew;
+    private GameObject languageEntry;
 
     public Toggle addition, substraction, multiplication, division;
 
@@ -41,9 +45,11 @@ public class Settings : MonoBehaviour
     private int SliderValueOnEntry;
 
     private List<Toggle> operationEntry;
+    private string newLanguage;
     
     public void settingsPanel()
     {
+        music = Resources.FindObjectsOfTypeAll<AudioSource>()[0].gameObject;
         GameObject gameOverParent = GameObject.Find("Canvas");
         settingsPanelObject = gameOverParent.transform.Find("SettingsPanel").gameObject;
         sliderText.text = slider.value.ToString();
@@ -57,7 +63,7 @@ public class Settings : MonoBehaviour
         numOfAnsToggles = GameObject.FindGameObjectsWithTag("NumberOfAnswers");
         musicToggle = GameObject.FindGameObjectsWithTag("Music");
 
-        highlightRightOne(PlayerPrefs.GetInt("NumberOfTasks"), PlayerPrefs.GetInt("NumberOfAnswers"), PlayerPrefs.GetInt("Music"));
+        highlightRightOne(PlayerPrefs.GetInt("NumberOfTasks"), PlayerPrefs.GetInt("NumberOfAnswers"), PlayerPrefs.GetInt("Music"), PlayerPrefs.GetString("Language"));
 
         NumberOfAnsToggle();
         NumberOfTasksToggle();
@@ -71,6 +77,7 @@ public class Settings : MonoBehaviour
         musicGO = whichIsOn(musicToggle);
         SliderValueOnEntry = (int) slider.value;
         typeAnsGO = whichIsOn(typeOfAns);
+        languageEntry = whichIsOn(languageToggles);
         operationEntry = new List<Toggle>();
 
         if (addition.isOn) operationEntry.Add(addition);
@@ -108,7 +115,7 @@ public class Settings : MonoBehaviour
         }
     }
 
-    public void highlightRightOne(int tasks, int answers, int music)
+    public void highlightRightOne(int tasks, int answers, int music1, string language)
     {
 
         foreach(GameObject obj in numOfTasksToggles)
@@ -127,18 +134,40 @@ public class Settings : MonoBehaviour
                 break;
             }
         }
+        print(music);
         foreach (GameObject obj in musicToggle)
         {
-            if (obj.name.Equals("MusicYes") && music == 1)
+            if (obj.name.Equals("MusicYes") && music.activeSelf)
             {
                 obj.GetComponent<Toggle>().isOn = true;
                 break;
-            } else
-            if (obj.name.Equals("MusicNo") && music == 0)
+            } else if (obj.name.Equals("MusicNo") && music.activeSelf)
             {
                 obj.GetComponent<Toggle>().isOn = true;
                 break;
             }
+        }
+
+        switch (language)
+        {
+            case "English":
+                languageToggles[0].GetComponent<Toggle>().isOn = true;
+                break;
+            case "Croatian":
+                languageToggles[1].GetComponent<Toggle>().isOn = true;
+                break;
+            case "Spanish":
+                languageToggles[2].GetComponent<Toggle>().isOn = true;
+                break;
+            case "French":
+                languageToggles[3].GetComponent<Toggle>().isOn = true;
+                break;
+            case "Portuguese":
+                languageToggles[4].GetComponent<Toggle>().isOn = true;
+                break;
+            case "Hungarian":
+                languageToggles[5].GetComponent<Toggle>().isOn = true;
+                break;
         }
 
     }
@@ -228,6 +257,7 @@ public class Settings : MonoBehaviour
                 if (toggleGameObj.name.Equals("MusicYes"))
                 {
                     PlayerPrefs.SetInt("Music", 1);
+                    print("Upali glazbu");
                 }
                 else
                 {
@@ -251,6 +281,36 @@ public class Settings : MonoBehaviour
         musicGO.GetComponent<Toggle>().isOn = true;
         numOfAnsGO.GetComponent<Toggle>().isOn = true;
         typeAnsGO.GetComponent<Toggle>().isOn = true;
+        languageEntry.GetComponent<Toggle>().isOn = true;
+        String language = PlayerPrefs.GetString("Language");
+        print("Language: " + language);
+        switch (language)
+        {
+            case "English":
+                Localize.SetCurrentLanguage(SystemLanguage.English);
+                LocalizeImage.SetCurrentLanguage();
+                break;
+            case "Croatian":
+                Localize.SetCurrentLanguage(SystemLanguage.SerboCroatian);
+                LocalizeImage.SetCurrentLanguage();
+                break;
+            case "Spanish":
+                Localize.SetCurrentLanguage(SystemLanguage.Spanish);
+                LocalizeImage.SetCurrentLanguage();
+                break;
+            case "French":
+                Localize.SetCurrentLanguage(SystemLanguage.French);
+                LocalizeImage.SetCurrentLanguage();
+                break;
+            case "Portuguese":
+                Localize.SetCurrentLanguage(SystemLanguage.Portuguese);
+                LocalizeImage.SetCurrentLanguage();
+                break;
+            case "Hungarian":
+                Localize.SetCurrentLanguage(SystemLanguage.Hungarian);
+                LocalizeImage.SetCurrentLanguage();
+                break;
+        }
         slider.value = SliderValueOnEntry;
         settingsPanelObject.SetActive(false);
         foreach (GameObject button in menuButtons)
@@ -265,8 +325,12 @@ public class Settings : MonoBehaviour
 
     public void SaveSettings()
     {
+        MusicToggle();
+        print("Music" +musicGONew.name);
+
         if (musicGONew.name.Equals("MusicYes"))
         {
+            print("Active");
             PlayerPrefs.SetInt("Music", 1);
             music.SetActive(true);
         }
@@ -295,7 +359,6 @@ public class Settings : MonoBehaviour
         TypeOfAnswer();
         FindTypeOfAnswer(typeOfAnswer.name);
         PlayerPrefs.SetInt("toNumber",(int) slider.value);
-
         //Getting viable operations
         if (addition.isOn)
         {

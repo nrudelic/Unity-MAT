@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-H:/FER/Zavrsni_verzija_v0.2.apk
+H:/zavrsni backup/nova verzija/matematicki_vrtuljak.apk
 SceneListBegin?
 Assets/Scenes/LoadingScene.unity
 Assets/Scenes/MainMenu.unity
@@ -125,13 +125,15 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 8e1617ba7d48e626d5c6d610e4febf8a Assembly-CSharp.dll:DFTGames.Localization.LocalizeImage
 f095fd7ae1ce46b23b921fa88f48d401 Assembly-CSharp.dll:.ToggleMusic
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
+235a1e8275c5d1ab2a1c0f017d90e1b5 Assembly-CSharp.dll:.AboutUs
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LoadScene
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 8e1617ba7d48e626d5c6d610e4febf8a Assembly-CSharp.dll:DFTGames.Localization.Localize
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 51932a0a824b42a90a47af8ae706ebe2 Assembly-CSharp.dll:.ToggleTypeAns
-c98bb9140d0f96e2714205f29a5fb574 Assembly-CSharp.dll:.NumbersGame
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Dummy
+d44c2fc087de4de7feea163f5e1fbea1 Assembly-CSharp.dll:.NumbersGame
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -147,7 +149,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Audio
-673c92adc7ce58dfcc6bb7bb82720df0 Assembly-CSharp.dll:.SetsGame
+3c11380042d6c6302467b46af67989d4 Assembly-CSharp.dll:.SetsGame
 315c826f4a0125d9180882fd0d5e953f Assembly-CSharp.dll:.Summary
 35a9693c388776aaf487636491a20f11 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
@@ -168,7 +170,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 f119f3ac93ce248a4a05e14e76e54885 Assembly-CSharp.dll:.Pause
 8e1617ba7d48e626d5c6d610e4febf8a Assembly-CSharp.dll:DFTGames.Localization.LocalizeTM
-b8be83b770c658e36f5e931497a37e7d Assembly-CSharp.dll:.OperationsGame
+e0be22954c8485855cea1520ff195763 Assembly-CSharp.dll:.OperationsGame
 3b760e6526e13f7504f59e210145899a Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 507174d46dacbc5fe45e28485db5dd1e Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
@@ -176,9 +178,10 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.toNumberDiff
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BGSoundScript
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
+c4591ec418cf82bfa73b95b6e5915add Assembly-CSharp.dll:.LanguageToggle
 528898dedf8d689dc6fb13cda86c9c21 Assembly-CSharp.dll:.SliderValue
 df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 b37391050a3f238d6cb9b2cbd1bf5f50 Assembly-CSharp.dll:.OperationSettings
-86311a847ace71aa4dbff3bb11e1e04e Assembly-CSharp.dll:.Settings
+ab91cd36a2701cca780f08543af5ce92 Assembly-CSharp.dll:.Settings

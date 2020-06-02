@@ -15,7 +15,6 @@ public class ToggleMusic : MonoBehaviour
     {
         toggles = GameObject.FindGameObjectsWithTag("Music");
         ButtonTransitionColors();
-
     }
 
     public void ButtonTransitionColors()

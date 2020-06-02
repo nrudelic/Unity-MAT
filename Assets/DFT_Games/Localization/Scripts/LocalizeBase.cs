@@ -85,8 +85,8 @@ namespace DFTGames.Localization
             Locale.CurrentLanguage = language.ToString();
             Locale.PlayerLanguage = language;
             print("language: " + Locale.PlayerLanguage);
-            Localize[] allTexts = GameObject.FindObjectsOfType<Localize>();
-            LocalizeTM[] allTextsTM = GameObject.FindObjectsOfType<LocalizeTM>();
+            Localize[] allTexts = Resources.FindObjectsOfTypeAll<Localize>();
+            LocalizeTM[] allTextsTM = Resources.FindObjectsOfTypeAll<LocalizeTM>();
             for (int i = 0; i < allTexts.Length; i++)
                 allTexts[i].UpdateLocale();
             for (int i = 0; i < allTextsTM.Length; i++)

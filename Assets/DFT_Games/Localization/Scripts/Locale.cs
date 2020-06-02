@@ -10,7 +10,7 @@ namespace DFTGames.Localization
         const string STR_LOCALIZATION_KEY = "locale";
         const string STR_LOCALIZATION_PREFIX = "localization/";
         static string currentLanguage;
-        //static bool currentLanguageFileHasBeenFound = false;
+        static bool currentLanguageFileHasBeenFound = false;
         public static bool currentLanguageHasBeenSet = false;
         public static Dictionary<string, string> CurrentLanguageStrings = new Dictionary<string, string>();
         static TextAsset currentLocalizationText;
@@ -23,9 +23,11 @@ namespace DFTGames.Localization
             get { return currentLanguage; }
             set
             {
+                
                 if (value != null && value.Trim() != string.Empty)
                 {
                     currentLanguage = value;
+                    /*
                     if (value.Equals(SystemLanguage.French.ToString()))
                     {
                         currentLanguage = SystemLanguage.French.ToString();
@@ -43,7 +45,7 @@ namespace DFTGames.Localization
                     else
                     {
                         currentLanguage = SystemLanguage.English.ToString();
-                    }
+                    }*/
 
                     currentLanguageHasBeenSet = true;
 
@@ -57,6 +59,7 @@ namespace DFTGames.Localization
                     }
                     if (currentLocalizationText != null)
                     {
+                        currentLanguageFileHasBeenFound = true;
                         string[] lines = currentLocalizationText.text.Split(new string[] { "\r\n", "\n\r", "\n" }, System.StringSplitOptions.RemoveEmptyEntries);
                         CurrentLanguageStrings.Clear();
                         for (int i = 0; i < lines.Length; i++)
